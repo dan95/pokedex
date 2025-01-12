@@ -13,11 +13,11 @@ export class PokedexSensorComponent {
     public pokemon: Pokemon = <Pokemon>{};
 
     async playAudio(): Promise<void> {
-        if (!this.pokemon?.audio) {
+        if (!this.pokemon?.cry) {
             return;
         }
 
-        const audio = new Audio(this.pokemon.audio);
+        const audio = new Audio(this.pokemon.cry);
 
         await audio.play();
     }

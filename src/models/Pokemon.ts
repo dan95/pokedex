@@ -8,6 +8,6 @@ export interface Pokemon {
     abilities: string[];
     moves: string[];
     imageUrls: string[];
-    audio: string;
+    cry: string;
     stats: PokemonStat[];
 }

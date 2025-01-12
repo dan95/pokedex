@@ -23,13 +23,15 @@ export class PokemonApiService {
         return <Pokemon>{
             id: pokemonId,
             name: StringUtils.capitalizeFirstLetter(pokemonData.name),
-            abilities: (pokemonData.abilities || []).map((x: any) => 
+            abilities: (pokemonData.abilities || []).map((x: any) =>
                 x.ability.name.split('-').map((stringPart: string) => StringUtils.capitalizeFirstLetter(stringPart)).join(' ')),
-            moves: (pokemonData.moves || []).map((x: any) => 
+            moves: (pokemonData.moves || []).map((x: any) =>
                 x.move.name.split('-').map((stringPart: string) => StringUtils.capitalizeFirstLetter(stringPart)).join(' ')),
-            audio: pokemonData.cries.latest,
+            cry: pokemonData.cries.latest,
             imageUrls: [
-                pokemonData.sprites.front_default,
+                (pokemonData.sprites?.other || {})['official-artwork']?.front_default
+                || (pokemonData.sprites?.other || {})['dream_world']?.front_default
+                || pokemonData.sprites?.front_default,
                 ...Object.keys(pokemonData.sprites)
                     .filter((key: string) => key !== 'front_default')
                     .map((key: string) => pokemonData.sprites[key])
