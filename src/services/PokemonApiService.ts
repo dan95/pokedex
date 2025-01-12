@@ -3,11 +3,31 @@ import { Environment } from "../env";
 import { Pokemon } from '../models/Pokemon';
 import { StringUtils } from "./StringUtils";
 import { PokemonStat } from "../models/PokemonStat";
+import { Utils } from "./Utils";
 
 @Injectable({
     providedIn: 'root'
 })
 export class PokemonApiService {
+    async getPokemonDescription(pokemonId: number): Promise<string> {
+        const response = await fetch(
+            `${Environment.apiUrl}/api/v2/pokemon-species/${pokemonId}`,
+            {
+                method: 'GET'
+            }
+        );
+
+        const result = await response.json();
+
+        const descriptionList = result['flavor_text_entries'].filter((x: any) => x?.language?.name === 'en');
+
+        const description = descriptionList[Utils.randomIntFromInterval(0, descriptionList.length-1)];
+
+        const sanitizedDescription = description['flavor_text'].replaceAll('\n', ' ');
+
+        return sanitizedDescription;
+    }
+    
     async getPokemonById(pokemonId: number): Promise<Pokemon> {
         const response = await fetch(
             `${Environment.apiUrl}/api/v2/pokemon/${pokemonId}`,

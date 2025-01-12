@@ -15,6 +15,10 @@ export class PokedexSongComponent implements OnInit {
     public isPlaying: boolean = false;
 
     ngOnInit(): void {
+        if (typeof Audio === 'undefined') {
+            return;
+        }
+
         this.audio = new Audio(Environment.pokemonSoundtrack);
         this.audio!.loop = true;
         this.audio.currentTime = 6.5;
