@@ -23,8 +23,10 @@ export class PokemonApiService {
         return <Pokemon>{
             id: pokemonId,
             name: StringUtils.capitalizeFirstLetter(pokemonData.name),
-            abilities: (pokemonData.abilities || []).map((x: any) => StringUtils.capitalizeFirstLetter(x.ability.name)),
-            moves: (pokemonData.moves || []).map((x: any) => StringUtils.capitalizeFirstLetter(x.move.name)),
+            abilities: (pokemonData.abilities || []).map((x: any) => 
+                x.ability.name.split('-').map((stringPart: string) => StringUtils.capitalizeFirstLetter(stringPart)).join(' ')),
+            moves: (pokemonData.moves || []).map((x: any) => 
+                x.move.name.split('-').map((stringPart: string) => StringUtils.capitalizeFirstLetter(stringPart)).join(' ')),
             audio: pokemonData.cries.latest,
             imageUrls: [
                 pokemonData.sprites.front_default,
@@ -41,7 +43,7 @@ export class PokemonApiService {
             secondaryType: pokemonTypes.at(1),
             stats: pokemonData.stats.map((x: any) => {
                 return <PokemonStat>{
-                    name: x.stat.name,
+                    name: x.stat.name.toUpperCase(),
                     baseStat: x.base_stat
                 };
             })

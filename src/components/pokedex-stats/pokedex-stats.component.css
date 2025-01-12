@@ -28,6 +28,10 @@
         li {
             margin: 5px;
         }
+
+        li.pokemon-stats-item {
+            margin-top: 15px;
+        }
     }
 
     .pokemon-stats {

@@ -11,6 +11,7 @@ import { PokemonEventService } from "../../services/PokemonEventService";
 import { ResourceNavigationTypeEnum } from "../../models/ResourceNavigationTypeEnum";
 import { Environment } from "../../env";
 import { PokemonChangeEvent } from "../../models/PokemonChangeEvent";
+import { PokedexSongComponent } from "../pokedex-song/pokedex-song.component";
 
 @Component({
     selector: 'pokedex-frame',
@@ -22,6 +23,7 @@ import { PokemonChangeEvent } from "../../models/PokemonChangeEvent";
         PokedexStatsComponent,
         PokedexActionPadComponent,
         PokedexPokemonTypeComponent,
+        PokedexSongComponent,
         CommonModule
     ]
 })

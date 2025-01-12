@@ -30,6 +30,11 @@
         grid-row-start: 5;
     }
 
+    pokedex-song {
+        grid-column-start: 4;
+        grid-row-start: 1;
+    }
+
     pokedex-stats {
         grid-column-start: 4;
         grid-row-start: 3;

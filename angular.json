@@ -24,7 +24,8 @@
               {
                 "glob": "**/*",
                 "input": "public"
-              }
+              },
+              "src/assets/audio"
             ],
             "styles": [
               "src/styles.css"
@@ -87,6 +88,10 @@
               {
                 "glob": "**/*",
                 "input": "public"
+              },
+              {
+                "glob": "**/*",
+                "input": "audio"
               }
             ],
             "styles": [

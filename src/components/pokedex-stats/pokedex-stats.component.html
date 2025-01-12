@@ -7,11 +7,10 @@
     </h3>
     <ul class="pokemon-stats">
         @for(stat of this.pokemon.stats; track stat) {
-            <li>
+            <li class="pokemon-stats-item">
                 <p>
                     {{stat.name}}
                 </p>
-                <br>
                 <div class="stat-bar">
                     <div class="stat" style="width: {{(stat.baseStat + '%')}}"></div>
                 </div>

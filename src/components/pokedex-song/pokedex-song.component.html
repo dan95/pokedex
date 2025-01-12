@@ -1,0 +1,8 @@
+<div class="song">
+    @if(!isPlaying) {
+        <p (click)="playAudio()">🎵</p>
+    }
+    @else {
+        <p (click)="stopAudio()">🎵</p>
+    }
+</div>
