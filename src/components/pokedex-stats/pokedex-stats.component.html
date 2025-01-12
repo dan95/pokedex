@@ -1,0 +1,35 @@
+<div class="pokedex-stats" >
+    <h2>#<input class="pokemon-id" type="number" [(ngModel)]="pokemonId" (ngModelChange)="changePokemon()"></h2>
+    <h2>{{pokemon.name}}</h2>
+    <br/>
+    <h3>
+        Stats
+    </h3>
+    <ul class="pokemon-stats">
+        @for(stat of this.pokemon.stats; track stat) {
+            <li>
+                <p>
+                    {{stat.name}}
+                </p>
+                <br>
+                <div class="stat-bar">
+                    <div class="stat" style="width: {{(stat.baseStat + '%')}}"></div>
+                </div>
+            </li>
+        }
+    </ul>
+    <br>
+    <h3>Abilities</h3>
+    <ul>
+        @for(ability of this.pokemon.abilities; track ability){
+            <li>{{ability}}</li>
+        }
+    </ul>
+    <br>
+    <h3>Moves</h3>
+    <ul>
+        @for(move of this.pokemon.moves; track move){
+            <li>{{move}}</li>
+        }
+    </ul>
+</div>

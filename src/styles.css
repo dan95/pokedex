@@ -1,1 +1,15 @@
-/* You can add global styles to this file, and also import other style files */
+body, html {
+    height: 100%;
+}
+.forest {
+    width: 100%;
+    height: 100%;
+    background-image: url('./assets/forest-2.png');
+    background-size: cover;
+    background-position: center;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}

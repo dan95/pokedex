@@ -1,0 +1,45 @@
+.pokedex-stats {
+    background-color: #9fdab1;
+    border-radius: 1%;
+    border: 5px solid #E6E6E6;
+    padding: 15px;
+    font-size: 13px;
+    
+    h2 {
+        margin: 10px 0;
+
+        .pokemon-id {
+            font-family: 'Press Start 2P';
+            font-size: 18px;
+            height: 40px;
+            width: 90px;
+        }
+
+        .pokemon-id::-webkit-inner-spin-button,
+        .pokemon-id::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+        }
+    }
+
+    ul {
+        margin: 10px;
+        overflow: hidden;
+        li {
+            margin: 5px;
+        }
+    }
+
+    .pokemon-stats {
+        padding: 0px;
+
+        .stat-bar {
+            width: 100%;
+            background-color: grey;
+            .stat {
+                height: 15px;
+                background-color: green;
+            }
+        }
+    }
+}

@@ -1,0 +1,8 @@
+<div *ngIf="pokemon !== undefined" class="pokedex-frame">
+    <pokedex-sensor [pokemon]="pokemon"></pokedex-sensor>
+    <pokedex-portrait [pokemon]="pokemon"></pokedex-portrait>
+    <pokedex-action-pad></pokedex-action-pad>
+    <div class="divider"></div>
+    <pokedex-stats [pokemon]="pokemon"></pokedex-stats>
+    <pokedex-pokemon-type [pokemon]="pokemon"></pokedex-pokemon-type>
+</div>

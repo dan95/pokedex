@@ -1,0 +1,17 @@
+.pokedex-portrait {
+    background-color: #E5F6FC;
+    border-radius: 5%;
+    border: 20px solid #E6E6E6;
+    display: grid;
+    grid-template-rows: 10% 80% 10%;
+    grid-template-columns: 10% 80% 10%;
+    height: 100%;
+    width: 90%;
+
+    img {
+        grid-row-start: 2;
+        grid-column-start: 2;
+        width: 100%;
+        height: 100%;
+    }
+}

@@ -1,0 +1,8 @@
+<div class="pokemon-types">
+    <div class="pokemon-type slot-1 {{pokemon?.primaryType}}">
+        <p>{{pokemon?.primaryType}}</p>
+    </div>
+    <div *ngIf="pokemon?.secondaryType" class="pokemon-type slot-2 {{pokemon?.secondaryType}}">
+        <p>{{pokemon?.secondaryType}}</p>
+    </div>
+</div>
