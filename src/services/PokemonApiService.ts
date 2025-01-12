@@ -49,8 +49,8 @@ export class PokemonApiService {
                 x.move.name.split('-').map((stringPart: string) => StringUtils.capitalizeFirstLetter(stringPart)).join(' ')),
             cry: pokemonData.cries.latest,
             imageUrls: [
-                (pokemonData.sprites?.other || {})['official-artwork']?.front_default
-                || (pokemonData.sprites?.other || {})['dream_world']?.front_default
+                (pokemonData.sprites?.other || {})['dream_world']?.front_default
+                || (pokemonData.sprites?.other || {})['official-artwork']?.front_default
                 || pokemonData.sprites?.front_default,
                 ...Object.keys(pokemonData.sprites)
                     .filter((key: string) => key !== 'front_default')
