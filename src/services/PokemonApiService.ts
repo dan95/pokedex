@@ -9,51 +9,51 @@ import { Utils } from "./Utils";
     providedIn: 'root'
 })
 export class PokemonApiService {
-    private async sendGetOrCache(
+    private async getApiData(
         uri: string
     ): Promise<string> {
-        const responseCache = localStorage.getItem(uri);
-
-        if (responseCache) {
-            return responseCache;
-        }
-
-        const response = await fetch(uri, {method:'GET'});
+        const response = await fetch(uri, { method: 'GET' });
 
         const responseText = await response.text();
-
-        localStorage.setItem(uri, responseText);
 
         return responseText;
     }
 
-    async getPokemonDescription(pokemonId: number): Promise<string> {
-        const response = await this.sendGetOrCache(
+    async getPokemonDescription(pokemonId: number): Promise<string[]> {
+        const response = await this.getApiData(
             `${Environment.apiUrl}/api/v2/pokemon-species/${pokemonId}`
         );
 
-
         const result = JSON.parse(response);
 
-        const descriptionList = result['flavor_text_entries'].filter((x: any) => x?.language?.name === 'en');
+        const descriptionList = result['flavor_text_entries']
+            .filter((x: any) => x?.language?.name === 'en')
+            .map((x: any) => x['flavor_text'].replaceAll('\n', ' '));
 
-        const description = descriptionList[Utils.randomIntFromInterval(0, descriptionList.length - 1)];
-
-        const sanitizedDescription = description['flavor_text'].replaceAll('\n', ' ');
-
-        return sanitizedDescription;
+        return descriptionList
     }
 
     async getPokemonById(pokemonId: number): Promise<Pokemon> {
-        const response = await this.sendGetOrCache(
-            `${Environment.apiUrl}/api/v2/pokemon/${pokemonId}`
-        );
+        const uri = `${Environment.apiUrl}/api/v2/pokemon/${pokemonId}`;
+
+        let _storage;
+        if (typeof localStorage !== 'undefined') {
+            _storage = localStorage; 
+        }
+
+        const cachedPokemon = _storage?.getItem(uri);
+
+        if(cachedPokemon) {
+            return <Pokemon>JSON.parse(cachedPokemon);
+        }
+
+        const response = await this.getApiData(uri);
 
         const pokemonData = JSON.parse(response);
 
         const pokemonTypes = (pokemonData.types || []).map((x: any) => x.type.name);
 
-        return <Pokemon>{
+        const pokemon = <Pokemon>{
             id: pokemonId,
             name: StringUtils.capitalizeFirstLetter(pokemonData.name),
             abilities: (pokemonData.abilities || []).map((x: any) =>
@@ -81,7 +81,12 @@ export class PokemonApiService {
                     name: x.stat.name.toUpperCase(),
                     baseStat: x.base_stat
                 };
-            })
+            }),
+            descriptionList: await this.getPokemonDescription(pokemonId)
         };
+
+        _storage!.setItem(uri, JSON.stringify(pokemon));
+
+        return pokemon;
     }
 }

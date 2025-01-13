@@ -4,7 +4,7 @@ import { CommonModule } from "@angular/common";
 import { FormsModule } from '@angular/forms'
 import { PokemonEventService } from "../../services/PokemonEventService";
 import { ResourceNavigationTypeEnum } from "../../models/ResourceNavigationTypeEnum";
-import { PokemonApiService } from "../../services/PokemonApiService";
+import { Utils } from "../../services/Utils";
 
 @Component({
     selector: 'pokedex-stats',
@@ -22,16 +22,15 @@ export class PokedexStatsComponent implements OnInit, OnChanges {
     public pokemonDescription?: string;
 
     constructor(
-        private pokemonEventService: PokemonEventService,
-        private pokemonApiService: PokemonApiService
+        private pokemonEventService: PokemonEventService
     ) {
     }
 
     async ngOnChanges(changes: SimpleChanges): Promise<void> {
         this.pokemonId = +changes['pokemonId']?.currentValue || changes['pokemon'].currentValue.id  ;
-        this.pokemonDescription = await this.pokemonApiService.getPokemonDescription(this.pokemonId);
-
-        console.log(this.pokemonDescription);
+        this.pokemonDescription = this.pokemon.descriptionList[
+            Utils.randomIntFromInterval(0, this.pokemon.descriptionList.length)
+        ];
     }
 
     ngOnInit(): void {

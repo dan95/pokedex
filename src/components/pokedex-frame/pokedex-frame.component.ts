@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Inject, OnInit } from "@angular/core";
 import { PokedexPortraitComponent } from "../pokedex-portrait/pokedex-portrait.component";
 import { PokedexSensorComponent } from "../pokedex-sensor/pokedex-sensor.component";
 import { PokedexStatsComponent } from "../pokedex-stats/pokedex-stats.component";
@@ -38,11 +38,10 @@ export class PokedexFrameComponent implements OnInit {
     }
 
     async ngOnInit(): Promise<void> {
-        localStorage.clear();
         await this.searchPokemon();
 
         this.pokemonEventService.changePokemonEvent.subscribe(
-            async (pokemonChangeEvent: PokemonChangeEvent) => 
+            async (pokemonChangeEvent: PokemonChangeEvent) =>
                 await this.handlePokemonNavigation(pokemonChangeEvent)
         );
     }

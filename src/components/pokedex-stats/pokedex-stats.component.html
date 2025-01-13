@@ -13,7 +13,7 @@
         Stats
     </h3>
     <ul class="pokemon-stats">
-        @for(stat of this.pokemon.stats; track stat) {
+        @for(stat of this.pokemon.stats; track stat.name) {
         <li class="pokemon-stats-item">
             <p>
                 {{stat.name}}

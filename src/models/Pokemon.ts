@@ -10,4 +10,5 @@ export interface Pokemon {
     imageUrls: string[];
     cry: string;
     stats: PokemonStat[];
+    descriptionList: string[];
 }
