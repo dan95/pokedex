@@ -7,6 +7,14 @@ Also implemented some functionalities such as pokémon searching and navigation.
 
 [Pokédex App](https://pokedex-soup.onrender.com/)
 
+#### Prints
+
+Description:
+![Description](./src/assets/example.png)
+
+Stats:
+![Stats](./src/assets/example.stats.png)
+
 
 ## HTML/CSS Credits:
 
