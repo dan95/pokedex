@@ -38,6 +38,7 @@ export class PokedexFrameComponent implements OnInit {
     }
 
     async ngOnInit(): Promise<void> {
+        localStorage.clear();
         await this.searchPokemon();
 
         this.pokemonEventService.changePokemonEvent.subscribe(

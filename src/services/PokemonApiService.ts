@@ -9,34 +9,47 @@ import { Utils } from "./Utils";
     providedIn: 'root'
 })
 export class PokemonApiService {
+    private async sendGetOrCache(
+        uri: string
+    ): Promise<string> {
+        const responseCache = localStorage.getItem(uri);
+
+        if (responseCache) {
+            return responseCache;
+        }
+
+        const response = await fetch(uri, {method:'GET'});
+
+        const responseText = await response.text();
+
+        localStorage.setItem(uri, responseText);
+
+        return responseText;
+    }
+
     async getPokemonDescription(pokemonId: number): Promise<string> {
-        const response = await fetch(
-            `${Environment.apiUrl}/api/v2/pokemon-species/${pokemonId}`,
-            {
-                method: 'GET'
-            }
+        const response = await this.sendGetOrCache(
+            `${Environment.apiUrl}/api/v2/pokemon-species/${pokemonId}`
         );
 
-        const result = await response.json();
+
+        const result = JSON.parse(response);
 
         const descriptionList = result['flavor_text_entries'].filter((x: any) => x?.language?.name === 'en');
 
-        const description = descriptionList[Utils.randomIntFromInterval(0, descriptionList.length-1)];
+        const description = descriptionList[Utils.randomIntFromInterval(0, descriptionList.length - 1)];
 
         const sanitizedDescription = description['flavor_text'].replaceAll('\n', ' ');
 
         return sanitizedDescription;
     }
-    
+
     async getPokemonById(pokemonId: number): Promise<Pokemon> {
-        const response = await fetch(
-            `${Environment.apiUrl}/api/v2/pokemon/${pokemonId}`,
-            {
-                method: 'GET'
-            });
+        const response = await this.sendGetOrCache(
+            `${Environment.apiUrl}/api/v2/pokemon/${pokemonId}`
+        );
 
-        const pokemonData = await response.json();
-
+        const pokemonData = JSON.parse(response);
 
         const pokemonTypes = (pokemonData.types || []).map((x: any) => x.type.name);
 
