@@ -85,7 +85,7 @@ export class PokemonApiService {
             descriptionList: await this.getPokemonDescription(pokemonId)
         };
 
-        _storage!.setItem(uri, JSON.stringify(pokemon));
+        _storage?.setItem(uri, JSON.stringify(pokemon));
 
         return pokemon;
     }
